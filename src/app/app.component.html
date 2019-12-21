@@ -1,0 +1,8 @@
+<app-header></app-header>
+<div class="container">
+  <app-post *ngFor="let post of data.posts"
+            [newPost]="post"
+            (postId)="updatePost($event)"
+  ></app-post>
+</div>
+

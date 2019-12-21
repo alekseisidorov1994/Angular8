@@ -1,0 +1,80 @@
+<div class="post">
+
+  <div class="post__header">
+
+    <div class="post__user">
+      <div class="user">
+        <a href="#" class="user__avatar">
+          <img src="{{post.user.image}}" alt="">
+        </a>
+        <a href="#" class="user__name">
+         {{post.user.name}} {{post.user.family}}
+        </a>
+      </div>
+
+    </div>
+
+    <div class="post__links">
+      <a href="#" class="edit-link"
+         (click)="remove(post.id,$event)"
+      >
+        <i class="far fa-trash-alt"></i>
+        Delete
+      </a>
+
+
+      <a href="edit.html" class="edit-link">
+        <i class="fas fa-pencil-alt"></i>
+        Edit
+      </a>
+
+    </div>
+  </div>
+
+  <div class="post__img">
+    <img src="{{post.content.image}}" alt="Photo"
+         *ngIf="post.content.image.length == 1; else carousel"
+    >
+    <ng-template #carousel>
+      <div class="slider owl-theme">
+        <img *ngFor="let img of post.content.image" [src]="img" alt="Photo">
+      </div>
+    </ng-template>
+
+  </div>
+
+  <!-- post__data  -->
+  <div class="post__data">
+
+    <div class="post__description">
+      {{post.content.description}}
+    </div>
+
+    <div class="post__hashtags">
+      <a href="#"
+         *ngFor="let tag of post.content.tags"
+      >{{tag}}</a>
+
+    </div>
+  </div>
+  <!-- // post__data -->
+
+  <!-- post__comments -->
+  <div class="post__comments">
+    <app-comment
+      *ngFor="let comment of post.comments"
+      [newComment]="comment"
+    >
+    </app-comment>
+
+  </div>
+  <!-- // post__comments -->
+
+  <div class="post__comment-form">
+    <div class="comment-form">
+      <textarea class="comment-form__textarea" placeholder="Добавить комментарий"></textarea>
+      <button disabled class="comment-form__button">Опубликовать</button>
+    </div>
+  </div>
+
+</div>
